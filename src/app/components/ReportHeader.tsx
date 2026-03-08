@@ -1,5 +1,5 @@
 import { Download } from 'lucide-react';
-import logoImage from '../../assets/eic-logo-transparente.png';
+import logoEIC from '../../assets/eic-logo-transparente.png';
 
 export function ReportHeader() {
   return (
