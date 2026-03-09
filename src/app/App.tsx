@@ -70,7 +70,6 @@ export default function App() {
       try {
         const docRef = doc(db, 'reports', reportId);
         const docSnap = await getDoc(docRef);
-
         if (!docSnap.exists()) {
           setError('Relatório não encontrado.');
         } else {
@@ -110,7 +109,6 @@ export default function App() {
     );
   }
 
-  // Split competencies into two pages
   const competencies1 = report.competencies.slice(0, 2).map(c => ({
     title: c.name,
     score: c.rating,
@@ -132,26 +130,19 @@ export default function App() {
   return (
     <div className="min-h-screen bg-[#F0F4F8] py-8 px-4">
       <div className="max-w-[210mm] mx-auto space-y-8">
-        {/* PAGE 1 */}
-        <div className="bg-white rounded-lg shadow-xl overflow-hidden" style={{
-          width: '210mm',
-          minHeight: '297mm',
-          padding: '0'
-        }}>
+        <div className="bg-white rounded-lg shadow-xl overflow-hidden" style={{ width: '210mm', minHeight: '297mm', padding: '0' }}>
           <div className="space-y-0">
-            <ReportHeader
-              studentName={report.studentName}
-              studentClass={report.class}
-              period={report.period}
-              cefrLevel={report.cefrLevel}
-            />
+            <ReportHeader />
             <TitleSection
               situation={report.situation}
               evaluation={report.evaluation}
               cycleFocus={report.cycleFocus}
+              studentName={report.studentName}
+              studentClass={report.class}
+              classType={report.classType}
+              period={report.period}
             />
           </div>
-
           <div className="p-8 space-y-6">
             <StatCards
               attendance={report.attendance}
@@ -161,11 +152,8 @@ export default function App() {
             />
             <ProgressLegend />
             <RadarChartSection competencies={report.competencies} />
-
             <div>
-              <h2 className="text-xl font-bold text-[#070738] mb-4">
-                Avaliação por Competência
-              </h2>
+              <h2 className="text-xl font-bold text-[#070738] mb-4">Avaliação por Competência</h2>
               <div className="space-y-4">
                 {competencies1.map((comp) => (
                   <CompetencyCard key={comp.title} {...comp} />
@@ -175,32 +163,23 @@ export default function App() {
           </div>
         </div>
 
-        {/* PAGE 2 */}
-        <div className="bg-white rounded-lg shadow-xl overflow-hidden" style={{
-          width: '210mm',
-          minHeight: '297mm',
-          padding: '0'
-        }}>
+        <div className="bg-white rounded-lg shadow-xl overflow-hidden" style={{ width: '210mm', minHeight: '297mm', padding: '0' }}>
           <div className="p-8 space-y-6">
             <div className="space-y-4">
               {competencies2.map((comp) => (
                 <CompetencyCard key={comp.title} {...comp} />
               ))}
             </div>
-
             <TeacherVoice
               message={report.professorVoice}
               professorName={report.professorName}
             />
-
             <SignatureSection
               coordinatorName={report.coordinator}
               professorName={report.professorName}
             />
-
             <MeetingSchedule />
           </div>
-
           <Footer />
         </div>
       </div>
