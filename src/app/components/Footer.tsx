@@ -23,16 +23,16 @@ export function Footer() {
           );
         })}
       </div>
-      
+
       <div className="bg-[#EC5800] px-8 py-4 flex items-center justify-between">
         <div className="text-white text-sm">
           <span className="font-semibold">EIC - Escola de Idiomas e Cultura</span>
         </div>
         <div className="text-white text-sm">
-          contato@eic.escola.com.br · (11) 98765-4321
+          (11) 95354-1126
         </div>
         <div className="text-white text-sm">
-          Rua do Conhecimento, 123 - São Paulo
+          Rua dos Encanadores, 332 - Jardim Europa
         </div>
       </div>
     </div>
