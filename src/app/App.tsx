@@ -137,3 +137,52 @@ export default function App() {
           <div className="space-y-0">
             <ReportHeader />
             <TitleSection
+              situation={report.situation}
+              evaluation={report.evaluation}
+              cycleFocus={report.cycleFocus}
+              studentName={report.studentName}
+              studentClass={report.class}
+              classType={report.classType}
+              period={report.period}
+            />
+          </div>
+          <div className="p-8 space-y-6">
+            <StatCards
+              attendance={report.attendance}
+              testScore={report.testScore}
+              situation={report.situation}
+              cefrLevel={report.cefrLevel}
+            />
+            <ProgressLegend />
+            <RadarChartSection competencies={report.competencies} />
+            <div>
+              <h2 className="text-xl font-bold text-[#070738] mb-4">Avaliação por Competência</h2>
+              <div className="space-y-4">
+                {competencies1.map((comp) => (
+                  <CompetencyCard key={comp.title} {...comp} />
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="bg-white rounded-lg shadow-xl overflow-hidden" style={{ width: '210mm', minHeight: '297mm', padding: '0' }}>
+          <div className="p-8 space-y-6">
+            <div className="space-y-4">
+              {competencies2.map((comp) => (
+                <CompetencyCard key={comp.title} {...comp} />
+              ))}
+            </div>
+            <TeacherVoice
+              message={report.professorVoice}
+              professorName={report.professorName}
+            />
+            <SignatureSection reportId={reportId} />
+            <MeetingSchedule studentName={report.studentName} />
+          </div>
+          <Footer />
+        </div>
+      </div>
+    </div>
+  );
+}
