@@ -1,37 +1,54 @@
-import { User, Star, CheckCircle, Calendar } from 'lucide-react';
+import { User, Star, CheckCircle, BarChart2 } from 'lucide-react';
 
-const stats = [
-  {
-    label: 'FREQUÊNCIA',
-    value: '90%',
-    icon: User,
-    bgColor: 'bg-orange-50',
-    iconColor: 'text-[#EC5800]'
-  },
-  {
-    label: 'NOTA DO TESTE',
-    value: '70%',
-    icon: Star,
-    bgColor: 'bg-yellow-50',
-    iconColor: 'text-[#F5A623]'
-  },
-  {
-    label: 'SITUAÇÃO',
-    value: 'Aprovado',
-    icon: CheckCircle,
-    bgColor: 'bg-green-50',
-    iconColor: 'text-[#16A34A]'
-  },
-  {
-    label: 'NÍVEL CEFR',
-    value: 'B1',
-    icon: Calendar,
-    bgColor: 'bg-blue-50',
-    iconColor: 'text-blue-600'
+interface StatCardsProps {
+  attendance: number;
+  testScore: number;
+  situation: string;
+  cefrLevel: string;
+}
+
+const getSituacaoLabel = (situation: string) => {
+  switch (situation) {
+    case 'approved': return 'Aprovado(a)';
+    case 'in-progress': return 'Em Progresso';
+    case 'needs-attention': return 'Necessita Atenção';
+    case 'failed': return 'Reprovado(a)';
+    default: return situation;
   }
-];
+};
 
-export function StatCards() {
+export function StatCards({ attendance, testScore, situation, cefrLevel }: StatCardsProps) {
+  const stats = [
+    {
+      label: 'FREQUÊNCIA',
+      value: `${attendance}%`,
+      icon: User,
+      bgColor: 'bg-orange-50',
+      iconColor: 'text-[#EC5800]'
+    },
+    {
+      label: 'NOTA DO TESTE',
+      value: `${testScore}%`,
+      icon: Star,
+      bgColor: 'bg-yellow-50',
+      iconColor: 'text-[#F5A623]'
+    },
+    {
+      label: 'SITUAÇÃO',
+      value: getSituacaoLabel(situation),
+      icon: CheckCircle,
+      bgColor: 'bg-green-50',
+      iconColor: 'text-[#16A34A]'
+    },
+    {
+      label: 'NÍVEL CEFR',
+      value: cefrLevel,
+      icon: BarChart2,
+      bgColor: 'bg-blue-50',
+      iconColor: 'text-blue-600'
+    }
+  ];
+
   return (
     <div className="grid grid-cols-4 gap-4">
       {stats.map((stat) => {
